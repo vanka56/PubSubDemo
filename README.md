@@ -5,9 +5,13 @@ This is to demonstrate Spark Streaming on GCP infrastructure making use of DataP
 # Techstack
 
 Spark Streaming
+
 Scala
+
 DataProc Clusters
+
 Pub/Sub
+
 Basic python
 
 # Concept
@@ -37,6 +41,7 @@ gcloud dataproc clusters create cluster-7eeb --region us-central1 --zone us-cent
 ## Code
 
 cd /PubSubDemo
+
 ~/../../PubSubDemo $ mvn clean package
 
 // Following is only required to setup jupyter notebook(spylon kernel) to work with our code
@@ -48,6 +53,7 @@ sudo gcloud storage cp gs://$PROJECT/PubSubDemo/my_app-1.0-SNAPSHOT.jar /usr/lib
 ### Sender
 
 ~/../../PubSubDemo cd python_data_streamer
+
 ~/../../PubSubDemo/python_data_streamer $ python3 data_streamer.py $PROJECT json
 
 ### Receiver
@@ -55,7 +61,9 @@ sudo gcloud storage cp gs://$PROJECT/PubSubDemo/my_app-1.0-SNAPSHOT.jar /usr/lib
 on your local machine(after gcloud setup)
 
 export ARG1="$PROJECT test-topic test-topic-sub json 30 hdfs:///user/spark/checkpoint"
+
 export regionName="us-central1"
+
 export SPARK_PROPERTIES="spark.dynamicAllocation.enabled=false,spark.streaming.receiver.writeAheadLog.enabled=true"
 
 ~/../../PubSubDemo $ gcloud dataproc jobs submit spark --cluster cluster-7eeb --region $regionName  --jar target/my_app-1.0-SNAPSHOT.jar  --max-failures-per-hour 10 --properties $SPARK_PROPERTIES -- $ARG1
