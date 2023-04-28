@@ -45,6 +45,7 @@ cd /PubSubDemo
 ~/../../PubSubDemo $ mvn clean package
 
 // Following is only required to setup jupyter notebook(spylon kernel) to work with our code
+
 sudo gcloud storage cp gs://$PROJECT/PubSubDemo/my_app-1.0-SNAPSHOT.jar /usr/lib/spark/jars/
 
 
